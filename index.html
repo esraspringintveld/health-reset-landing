@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Reset 3.0 — Jouw persoonlijke reis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-dark:  #1b4332;
+      --green:       #2d6a4f;
+      --green-mid:   #40916c;
+      --green-light: #52b788;
+      --green-pale:  #d8f3dc;
+      --cream:       #f4f1eb;
+      --rose:        #b5838d;
+      --white:       #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--green-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 60%, var(--green-mid) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px 80px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      top: -200px; right: -200px;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.05);
+      bottom: -150px; left: -100px;
+    }
+
+    .logo {
+      margin-bottom: 32px;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .logo svg { filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3)); }
+
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 16px;
+      animation: fadeDown 0.8s 0.1s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 8vw, 64px);
+      font-weight: 900;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s 0.2s ease both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green-light);
+    }
+
+    .hero p {
+      font-size: clamp(16px, 3vw, 20px);
+      color: rgba(255,255,255,0.8);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 300;
+      animation: fadeDown 0.8s 0.3s ease both;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 17px;
+      padding: 18px 40px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 32px rgba(82,183,136,0.4);
+      animation: fadeDown 0.8s 0.4s ease both;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(82,183,136,0.5);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    /* ── WHAT ── */
+    .section {
+      padding: 80px 24px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 12px;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 6vw, 42px);
+      font-weight: 700;
+      color: var(--green-dark);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .section p {
+      font-size: 17px;
+      color: #4b5563;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      background: var(--green-dark);
+      padding: 80px 24px;
+    }
+
+    .features-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .features-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 5vw, 38px);
+      color: white;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .feature-item {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: background 0.2s;
+    }
+
+    .feature-item:hover {
+      background: rgba(255,255,255,0.11);
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .feature-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .feature-text p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── QUOTE ── */
+    .quote-section {
+      padding: 80px 24px;
+      text-align: center;
+      background: var(--green-pale);
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 5vw, 34px);
+      font-style: italic;
+      color: var(--green-dark);
+      max-width: 560px;
+      margin: 0 auto 16px;
+      line-height: 1.4;
+    }
+
+    .quote-author {
+      font-size: 13px;
+      color: var(--green-mid);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ── FORM ── */
+    .form-section {
+      padding: 80px 24px;
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .form-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 6vw, 40px);
+      color: var(--green-dark);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .form-section p {
+      font-size: 16px;
+      color: #6b7280;
+      margin-bottom: 36px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .form-card {
+      background: white;
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
+      width: 100%;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 16px;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #fafafa;
+    }
+
+    .form-group input:focus {
+      border-color: var(--green-light);
+      background: white;
+    }
+
+    .form-submit {
+      width: 100%;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 16px 24px;
+      font-size: 16px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .form-submit:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 13px;
+    }
+
+    footer span { color: var(--green-light); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="logo">
+    <svg width="100" height="100" viewBox="0 0 200 200">
+      <rect width="200" height="200" rx="100" fill="#1b4332"/>
+      <circle cx="100" cy="100" r="78" fill="none" stroke="#52b788" stroke-width="5"/>
+      <text x="100" y="128" text-anchor="middle" font-family="Georgia,serif" font-size="80" font-weight="700" fill="white">HR</text>
+      <ellipse cx="163" cy="32" rx="18" ry="10" fill="#52b788" transform="rotate(-35 163 32)"/>
+      <line x1="161" y1="22" x2="148" y2="48" stroke="#1b4332" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="hero-tag">Health Reset 3.0</div>
+  <h1>Jouw reis naar<br/><em>jouw beste zelf</em></h1>
+  <p>Volg jouw voortgang, vier je mijlpalen en houd je motivatie hoog — met een persoonlijk dashboard dat met jou meegroeit.</p>
+  <a href="#aanmelden" class="cta-btn">Ik wil toegang 🌿</a>
+  <div class="scroll-hint">↓ ontdek meer</div>
+</section>
+
+<!-- WAT IS HET -->
+<section class="section reveal">
+  <div class="section-tag">Wat is Health Reset 3.0?</div>
+  <h2>Een app die jou centraal zet</h2>
+  <p>Health Reset 3.0 is jouw persoonlijke digitale begeleider tijdens het reset-traject. Je volgt je eigen voortgang, ziet je resultaten groeien en krijgt dagelijks een motiverende quote om je op koers te houden. Simpel, overzichtelijk en helemaal van jou.</p>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features-inner">
+    <h2 class="features-title reveal">Wat zit er in de app?</h2>
+    <div class="feature-list">
+      <div class="feature-item reveal">
+        <div class="feature-icon">📊</div>
+        <div class="feature-text">
+          <h3>Persoonlijk dashboard</h3>
+          <p>Zie in één oogopslag hoeveel je al bereikt hebt en wat je doel is. Jouw eigen cijfers, jouw eigen voortgang.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-icon">🔥</div>
+        <div class="feature-text">
+          <h3>Mijlpalen & confetti</h3>
+          <p>Bij elke mijlpaal een feestje! De app viert je overwinningen met je mee — van de eerste kilo tot het einddoel.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-icon">📅</div>
+        <div class="feature-text">
+          <h3>Fase-beheer</h3>
+          <p>Altijd overzicht van in welke fase je zit, wanneer je wisselt en een handige checklist per fase.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-icon">😊</div>
+        <div class="feature-text">
+          <h3>Dagboek met stemming</h3>
+          <p>Hoe voel je je vandaag? Leg het vast met een emoji en een optionele notitie. Voor jezelf, niet voor anderen.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-icon">💬</div>
+        <div class="feature-text">
+          <h3>Dagelijkse motivatiequote</h3>
+          <p>Elke dag een nieuwe quote om je dag goed te beginnen. Warm, aanmoedigend en nooit zwaar.</p>
+        </div>
+      </div>
+      <div class="feature-item reveal">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-text">
+          <h3>Weegstreak</h3>
+          <p>Hoeveel dagen op rij ben jij al bezig? De app houdt het bij en viert je consistentie.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section reveal">
+  <div class="quote-text">"Kleine stapjes, grote reis."</div>
+  <div class="quote-author">Health Reset 3.0</div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="aanmelden">
+  <div class="section-tag reveal">Toegang aanvragen</div>
+  <h2 class="reveal">Doe je mee?</h2>
+  <p class="reveal">Meld je aan en ontvang toegang tot jouw persoonlijke Health Reset dashboard. Exclusief voor deelnemers aan het reset-traject.</p>
+
+  <div class="form-card reveal">
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Voornaam</label>
+        <input type="text" placeholder="Jouw naam" required autocomplete="given-name" />
+      </div>
+      <div class="form-group">
+        <label>E-mailadres</label>
+        <input type="email" placeholder="jouw@email.nl" required autocomplete="email" />
+      </div>
+      <button type="submit" class="form-submit">Ja, ik wil toegang! 🌿</button>
+      <p class="form-note">Je ontvangt een bevestiging zodra je toegang is goedgekeurd. Geen spam, beloofd.</p>
+    </form>
+    <div id="success" style="display:none;text-align:center;padding:20px 0;">
+      <div style="font-size:48px;margin-bottom:12px;">🎉</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;color:#1b4332;margin-bottom:8px;">Aanmelding ontvangen!</div>
+      <div style="font-size:15px;color:#6b7280;line-height:1.7;">Je hoort snel van ons zodra je toegang is goedgekeurd.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Health Reset 3.0 — Gemaakt met <span>🌿</span> voor jouw reis</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    // Hier koppel je MailerLite — het formulier stuurt de data naar jouw lijst
+  }
+
+  // Smooth scroll
+  document.querySelector('.cta-btn').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('aanmelden').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>

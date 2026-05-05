@@ -40,27 +40,17 @@
       text-align: center;
     }
 
-    .hero::before {
-      content: '';
+    /* Bladeren decoratie */
+    .hero-leaf {
       position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.06);
-      top: -200px; right: -200px;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.05);
-      bottom: -150px; left: -100px;
+      pointer-events: none;
     }
 
     .logo {
       margin-bottom: 32px;
       animation: fadeDown 0.8s ease both;
+      position: relative;
+      z-index: 1;
     }
 
     .logo svg { filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3)); }
@@ -72,6 +62,8 @@
       color: var(--green-light);
       margin-bottom: 16px;
       animation: fadeDown 0.8s 0.1s ease both;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
@@ -82,6 +74,8 @@
       line-height: 1.1;
       margin-bottom: 20px;
       animation: fadeDown 0.8s 0.2s ease both;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 em {
@@ -97,6 +91,8 @@
       margin-bottom: 40px;
       font-weight: 300;
       animation: fadeDown 0.8s 0.3s ease both;
+      position: relative;
+      z-index: 1;
     }
 
     .cta-btn {
@@ -112,6 +108,8 @@
       transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 8px 32px rgba(82,183,136,0.4);
       animation: fadeDown 0.8s 0.4s ease both;
+      position: relative;
+      z-index: 1;
     }
 
     .cta-btn:hover {
@@ -129,6 +127,7 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       animation: bounce 2s infinite;
+      z-index: 1;
     }
 
     /* ── WHAT ── */
@@ -269,7 +268,6 @@
       font-weight: 300;
     }
 
-    /* ── MailerLite form styling overrides ── */
     .form-wrapper {
       background: white;
       border-radius: 24px;
@@ -277,7 +275,6 @@
       box-shadow: 0 8px 40px rgba(0,0,0,0.08);
     }
 
-    /* Override MailerLite's default styles to match our design */
     .ml-embedded .ml-form-embedWrapper {
       background: transparent !important;
       border-radius: 0 !important;
@@ -296,11 +293,11 @@
       font-family: 'Playfair Display', serif !important;
       font-size: 20px !important;
       color: var(--green-dark) !important;
-      display: none; /* Hide MailerLite's own title since we have our own */
+      display: none;
     }
 
     .ml-embedded .ml-form-embedBody .ml-form-embedContent p {
-      display: none; /* Hide MailerLite's own subtitle since we have our own */
+      display: none;
     }
 
     .ml-embedded input {
@@ -405,7 +402,6 @@
       50%       { transform: translateX(-50%) translateY(6px); }
     }
 
-    /* Scroll reveal */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -417,7 +413,6 @@
     }
   </style>
 
-  <!-- MailerLite Universal — moet in de <head> staan -->
   <script>
     (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
     .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
@@ -425,12 +420,50 @@
     (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
     ml('account', '435060');
   </script>
-  <!-- End MailerLite Universal -->
 </head>
 <body>
 
 <!-- HERO -->
 <section class="hero">
+
+  <!-- Bladeren links onder -->
+  <svg class="hero-leaf" style="bottom:0;left:0;width:220px;height:280px" viewBox="0 0 220 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M-10 250 Q50 180 130 220 Q70 270 -10 280 Z" fill="#1b4332" opacity="0.9"/>
+    <path d="M-10 210 Q70 130 160 180 Q90 240 -10 240 Z" fill="#2d6a4f" opacity="0.7"/>
+    <path d="M0 265 Q90 210 180 250 Q110 280 0 280 Z" fill="#40916c" opacity="0.45"/>
+    <path d="M10 180 Q80 120 150 160 Q80 200 10 195 Z" fill="#2d6a4f" opacity="0.4"/>
+  </svg>
+
+  <!-- Bladeren rechts onder -->
+  <svg class="hero-leaf" style="bottom:0;right:0;width:220px;height:280px" viewBox="0 0 220 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M230 250 Q170 180 90 220 Q150 270 230 280 Z" fill="#1b4332" opacity="0.9"/>
+    <path d="M230 210 Q150 130 60 180 Q130 240 230 240 Z" fill="#2d6a4f" opacity="0.7"/>
+    <path d="M220 265 Q130 210 40 250 Q110 280 220 280 Z" fill="#40916c" opacity="0.45"/>
+    <path d="M210 180 Q140 120 70 160 Q140 200 210 195 Z" fill="#2d6a4f" opacity="0.4"/>
+  </svg>
+
+  <!-- Bladeren links boven -->
+  <svg class="hero-leaf" style="top:0;left:0;width:160px;height:160px" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M-10 0 Q50 30 80 90 Q20 70 -10 20 Z" fill="#2d6a4f" opacity="0.55"/>
+    <path d="M0 50 Q70 10 120 70 Q60 100 0 80 Z" fill="#40916c" opacity="0.35"/>
+  </svg>
+
+  <!-- Bladeren rechts boven -->
+  <svg class="hero-leaf" style="top:0;right:0;width:160px;height:160px" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M170 0 Q110 30 80 90 Q140 70 170 20 Z" fill="#2d6a4f" opacity="0.55"/>
+    <path d="M160 50 Q90 10 40 70 Q100 100 160 80 Z" fill="#40916c" opacity="0.35"/>
+  </svg>
+
+  <!-- Lichtpuntjes -->
+  <svg class="hero-leaf" style="top:0;left:0;width:100%;height:100%" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="280" cy="120" r="2.5" fill="#d8f3dc" opacity="0.5"/>
+    <circle cx="560" cy="70" r="2" fill="#d8f3dc" opacity="0.4"/>
+    <circle cx="820" cy="110" r="2.5" fill="#d8f3dc" opacity="0.5"/>
+    <circle cx="980" cy="90" r="2" fill="#d8f3dc" opacity="0.35"/>
+    <circle cx="180" cy="280" r="1.5" fill="#d8f3dc" opacity="0.3"/>
+    <circle cx="1040" cy="260" r="1.5" fill="#d8f3dc" opacity="0.3"/>
+  </svg>
+
   <div class="logo">
     <svg width="100" height="100" viewBox="0 0 200 200">
       <rect width="200" height="200" rx="100" fill="#1b4332"/>
@@ -442,7 +475,7 @@
   </div>
   <div class="hero-tag">Health Reset 3.0</div>
   <h1>Jouw reis naar<br/><em>jouw beste zelf</em></h1>
-  <p>Volg jouw voortgang, vier je mijlpalen en houd je motivatie hoog — met een persoonlijk dashboard dat met jou meegroeit.</p>
+  <p>Volg jouw voortgang, vier je mijlpalen en houd je motivatie hoog: met een persoonlijke app die jouw hele reis bijhoudt.</p>
   <a href="#aanmelden" class="cta-btn">Ik wil toegang 🌿</a>
   <div class="scroll-hint">↓ ontdek meer</div>
 </section>
@@ -518,7 +551,6 @@
   <p class="reveal">Meld je aan en ontvang toegang tot jouw persoonlijke Health Reset dashboard. Exclusief voor deelnemers aan het reset-traject.</p>
 
   <div class="form-wrapper reveal">
-    <!-- MailerLite Embedded Form — stuurt data rechtstreeks naar jouw MailerLite groep -->
     <div class="ml-embedded" data-form="Lm739b"></div>
     <p class="form-note">Je ontvangt een bevestiging zodra je toegang is goedgekeurd. Geen spam, beloofd.</p>
   </div>
@@ -530,7 +562,6 @@
 </footer>
 
 <script>
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -541,7 +572,6 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
-  // Smooth scroll
   document.querySelector('.cta-btn').addEventListener('click', (e) => {
     e.preventDefault();
     document.getElementById('aanmelden').scrollIntoView({ behavior: 'smooth' });

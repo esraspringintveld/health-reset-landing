@@ -380,6 +380,28 @@
       line-height: 1.6;
     }
 
+    /* ── BEDANKT BANNER ── */
+    .bedankt-banner {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+      background: var(--green-pale);
+      border-bottom: 3px solid var(--green-light);
+      padding: 18px 24px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--green-dark);
+      font-weight: 700;
+    }
+
+    .bedankt-banner.zichtbaar {
+      display: block;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--green-dark);
@@ -422,6 +444,11 @@
   </script>
 </head>
 <body>
+
+<!-- BEDANKT BANNER -->
+<div class="bedankt-banner" id="bedankt-banner">
+  🌿 Gelukt! Je aanmelding is ontvangen. Je hoort snel van me zodra je toegang is goedgekeurd. Fijn dat je er bent!
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -562,6 +589,12 @@
 </footer>
 
 <script>
+  // Toon bedankt-banner als ?bedankt=1 in de URL staat
+  if (new URLSearchParams(window.location.search).get('bedankt') === '1') {
+    document.getElementById('bedankt-banner').classList.add('zichtbaar');
+    window.scrollTo({ top: 0 });
+  }
+
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {

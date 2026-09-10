@@ -413,7 +413,13 @@
     }
   </style>
 
-
+  <script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '435060');
+  </script>
 </head>
 <body>
 
@@ -546,27 +552,12 @@
 
   <div class="form-wrapper reveal">
     <form id="hr-form" onsubmit="handleAanmelding(event)">
-      <input
-        type="email"
-        name="email"
-        placeholder="jouw@email.nl"
-        required
-        autocomplete="email"
-        autocapitalize="off"
-        autocorrect="off"
-        style="width:100%;padding:14px 18px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:16px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:12px;box-sizing:border-box;"
-      />
-      <button type="submit" id="hr-btn" style="width:100%;background:#2d6a4f;color:white;border:none;border-radius:14px;padding:16px 24px;font-size:16px;font-family:'Playfair Display',serif;font-weight:700;cursor:pointer;transition:background 0.2s;">
-        Ik wil toegang 🌿
-      </button>
-      <div id="hr-succes" style="display:none;margin-top:16px;background:#d8f3dc;border-radius:12px;padding:16px;color:#1b4332;font-weight:600;text-align:center;font-size:15px;line-height:1.6;">
-        🌿 Gelukt! Je aanmelding is ontvangen. Je hoort snel van me zodra je toegang is goedgekeurd. Fijn dat je er bent!
-      </div>
-      <div id="hr-fout" style="display:none;margin-top:16px;background:#fff0f0;border-radius:12px;padding:16px;color:#e76f51;text-align:center;font-size:14px;">
-        Er ging iets mis. Probeer het opnieuw.
-      </div>
+      <input type="email" name="email" placeholder="jouw@email.nl" required autocomplete="email" autocapitalize="off" autocorrect="off" style="width:100%;padding:14px 18px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:16px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:12px;box-sizing:border-box;" />
+      <button type="submit" id="hr-btn" style="width:100%;background:#2d6a4f;color:white;border:none;border-radius:14px;padding:16px 24px;font-size:16px;font-family:'Playfair Display',serif;font-weight:700;cursor:pointer;">Ik wil toegang</button>
+      <div id="hr-succes" style="display:none;margin-top:16px;background:#d8f3dc;border-radius:12px;padding:16px;color:#1b4332;font-weight:600;text-align:center;">Gelukt! Je aanmelding is ontvangen. Je hoort snel van me zodra je toegang is goedgekeurd.</div>
+      <div id="hr-fout" style="display:none;margin-top:16px;background:#fff0f0;border-radius:12px;padding:16px;color:#e76f51;text-align:center;">Er ging iets mis. Probeer het opnieuw.</div>
     </form>
-    <p class="form-note">Je ontvangt een bevestiging na aanmelding. Geen spam, beloofd.</p>
+    <p class="form-note">Je ontvangt een bevestiging zodra je toegang is goedgekeurd. Geen spam, beloofd.</p>
   </div>
 </section>
 
@@ -576,41 +567,6 @@
 </footer>
 
 <script>
-  async function handleAanmelding(e) {
-    e.preventDefault();
-    const email = document.querySelector('#hr-form input[name="email"]').value;
-    const btn = document.getElementById('hr-btn');
-    const succes = document.getElementById('hr-succes');
-    const fout = document.getElementById('hr-fout');
-
-    btn.disabled = true;
-    btn.textContent = 'Bezig…';
-    succes.style.display = 'none';
-    fout.style.display = 'none';
-
-    try {
-      const res = await fetch('https://assets.mailerlite.com/jsonp/435060/forms/186539717403084404/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'fields[email]=' + encodeURIComponent(email)
-      });
-      const data = await res.json();
-      if (data.success) {
-        succes.style.display = 'block';
-        document.querySelector('#hr-form input').value = '';
-        btn.textContent = 'Aangemeld! 🌿';
-      } else {
-        fout.style.display = 'block';
-        btn.disabled = false;
-        btn.textContent = 'Ik wil toegang 🌿';
-      }
-    } catch {
-      fout.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Ik wil toegang 🌿';
-    }
-  }
-
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -620,6 +576,39 @@
     });
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
+
+  async function handleAanmelding(e) {
+    e.preventDefault();
+    const email = document.querySelector('#hr-form input[name="email"]').value;
+    const btn = document.getElementById('hr-btn');
+    const succes = document.getElementById('hr-succes');
+    const fout = document.getElementById('hr-fout');
+    btn.disabled = true;
+    btn.textContent = 'Bezig...';
+    succes.style.display = 'none';
+    fout.style.display = 'none';
+    try {
+      const formData = new FormData();
+      formData.append('fields[email]', email);
+      formData.append('ml-submit', '1');
+      formData.append('anticsrf', 'true');
+      const res = await fetch('https://assets.mailerlite.com/jsonp/435060/forms/186539717403084404/subscribe', { method: 'POST', body: formData });
+      const data = await res.json();
+      if (data.success) {
+        succes.style.display = 'block';
+        document.querySelector('#hr-form input').value = '';
+        btn.textContent = 'Aangemeld!';
+      } else {
+        fout.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Ik wil toegang';
+      }
+    } catch {
+      fout.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Ik wil toegang';
+    }
+  }
 
   document.querySelector('.cta-btn').addEventListener('click', (e) => {
     e.preventDefault();
